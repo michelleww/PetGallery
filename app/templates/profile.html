@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="row justify-content-center">
+    Welcome to Profile Page {{username}}
+</h1>
+
+<br>
+
+<form method="POST"action="{{url_for('main.profile')}}">
+<div class="row justify-content-center">
+    <div class="field">
+        <div class="control">
+            <h5>Change Password</h5>
+            <input class="input" type="text" name="password" placeholder="new password" autofocus="">
+        </div>
+    </div>
+</div>
+
+<div class="row mt-1 justify-content-center">
+    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Submit</button>
+</div>
+</form>
+{% endblock %}

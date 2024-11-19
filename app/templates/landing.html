@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Landing Page
+{% endblock %}
+
+{% block head %} 
+{{ super() }}
+<link href='https://fonts.googleapis.com/css2?family=Kalam&family=Saira+Condensed:wght@300&display=swap' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <video id="background-video" autoplay loop muted poster="">
+        <source src="{{url_for('static', filename='landing.mp4')}}" type="video/mp4">
+    </video>
+    <div class="title">Pets Sharing</div>
+    <div class="introduction">Cute pets photo sharing and collections boutique</div>
+{% endblock %}

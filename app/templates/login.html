@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}Login/Signup{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important {
+            color: #336699;
+        }
+        form {
+            width: 30%;
+        }
+        input {
+            width: 100%;
+            height: 5vh;
+        }
+        .login-btn {
+            width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+	<h3 class="title">Login</h3>
+</div>
+
+<div class="row justify-content-center">
+    <form method="POST" action="{{url_for('main.login')}}">
+        <div class="field">
+            <div class="control">
+                <h5>Username</h5>
+                <input class="input" type="text" name="username" placeholder="Your Username" autofocus="">
+            </div>
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <h5>Password</h5>
+                <input class="input" type="password" name="password" placeholder="Your Password">
+            </div>
+        </div>
+        <div class="row mt-3 justify-content-center">
+            <p> Or <a href="{{url_for('main.signup')}}">create an account</a> </p>
+        </div>
+        <div class="row mt-1 justify-content-center">
+			<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Login</button>
+		</div>
+    </form>
+</div>
+  
+{% endblock %}

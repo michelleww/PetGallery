@@ -1,0 +1,35 @@
+{% extends "layout.html" %} {% block title %}Upload images{% endblock %} {% block
+head %} {{ super() }}
+<style type="text/css">
+	.important {
+		color: #336699;
+	}
+</style>
+{% endblock %} 
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+	<b>Welcome to upload page. Upload your image with name as key to retrieve in future.</b>
+</div>
+
+<div class="row justify-content-center mt-3">
+	<form action="{{ url_for('main.upload')}}" method="post" enctype = "multipart/form-data">
+		<div class="row mt-3">
+			<label>key:</label>
+			<input type="text" name="key" />
+		</div>
+		<div class="row mt-3">
+			<label>description:</label>
+			<input type="text" name="description" />
+		</div>
+		<div class="row mt-3">
+			<input type="file" name="file" accept="image/*"/>
+		</div>
+		<div class="row mt-3">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Upload</button>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

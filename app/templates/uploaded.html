@@ -1,0 +1,50 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+	Uploaded images
+{% endblock %}
+
+{% block head %} {{ super() }}
+<style type="text/css">
+	.important {
+		color: #336699;
+	}
+	li {
+		text-align: center;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+	<b>Welcome to the uploaded images page. Find images uploaded by yourself.</b>
+</div>
+
+<table class="table table-bordered table-hover mt-4">
+	<thead>
+	  <tr>
+		<th scope="col">#</th>
+		<th scope="col">Key</th>
+	  </tr>
+	</thead>
+{% if keys %}
+	<caption>List of keys</caption>
+	{% for key in keys %}
+		<tbody>
+			<tr>
+			  <th scope="row">{{loop.index}}</th>
+			  <td>{{key}}</td>
+			  <td>
+				<form class="form-inline" action="{{ url_for('main.deleteUploaded')}}", method="POST">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="key" value = '{{key}}'>Delete</button>
+				</form> 
+			  </td>
+			</tr>
+		  </tbody>
+	{% endfor %}
+{% else %}
+	<caption>No keys found</caption>
+{% endif %}
+</table>
+{% endblock %}
+

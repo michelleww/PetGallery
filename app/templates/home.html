@@ -1,0 +1,88 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+	Art Gallery
+{% endblock %}
+
+{% block head %} {{ super() }}
+<style type="text/css">
+	.important {
+		color: #336699;
+	}
+	li {
+		text-align: center;
+	}
+	.card-columns {
+		@include media-breakpoint-only(lg) {
+		  column-count: 4;
+		}
+		@include media-breakpoint-only(xl) {
+		  column-count: 5;
+		}
+	  }
+	.bg-pink {
+		color: #FFB6C1;
+	}
+	.bg-yellow {
+		color: #FFEA00
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+	<b>Welcome to home page! Please find the cutiest pictures here and feel free to explore more using the refesh button.</b>
+</div>
+
+{% if posts %}
+<div class="row mt-4">
+	{% for post in posts %}
+	<div class="col-lg-4 d-flex align-items-stretch">
+		<div class="card">
+		<img src="{{ "data:image/png;base64, " + post['Image']}}" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">{{post.Key}}</h5>
+			<p class="card-text">{{post.Description}}</p>
+			<p class="card-text"><small class="text-muted">Shared by {{post.Username}}</small></p>
+			<div>
+				<div class="row">
+					<div class="col">
+						<form action="{{url_for('main.like')}}" method="post" enctype = "multipart/form-data">
+							<a href="javascript:;" onclick="parentNode.submit();" class="fa fa-heart bg-pink"></a>
+							<input type="hidden" name="username", value={{user.username}}>
+							<input type="hidden" name="author", value={{post.Username}}>
+							<input type="hidden" name="key", value={{post.Key}}>
+							<input type="hidden" name="source", value="home">
+						</form>
+						<p>{{post.Num_likes}}</p>
+					</div>
+					{% if user and user.username %}
+						<div class="col">
+							<form action="{{url_for('main.collection')}}" method="post" enctype = "multipart/form-data">
+								<a href="javascript:;" onclick="parentNode.submit();" class="fa fa-star bg-yellow"></a>
+								<input type="hidden" name="username", value={{user.username}}>
+								<input type="hidden" name="author", value={{post.Username}}>
+								<input type="hidden" name="key", value={{post.Key}}>
+								<input type="hidden" name="source", value="home">
+							</form>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+<div class="row justify-content-center mt-4">
+	<form class="form-inline" action="{{ url_for('main.home')}}">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Refresh</button>
+	</form> 
+</div>
+{% else %}
+<div class="container mt-5">
+    <p>No posts found</p>
+</div>
+{% endif %}
+{% endblock %}
+

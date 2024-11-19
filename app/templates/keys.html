@@ -1,0 +1,89 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+	Art Gallery
+{% endblock %}
+
+{% block head %} {{ super() }}
+<style type="text/css">
+    .tags {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        gap: 1rem;
+        display: inline-flex;
+        flex-wrap: wrap;
+    }
+    
+    .tag {
+        --color: #d0dffc;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        border-radius: 100rem;
+        box-shadow: 0 0 0 2px #d0dffc;
+        background-color: transparent;
+        color: #283b70;
+        font-weight: bold;
+        transition:
+            background-color 250ms ease,
+            box-shadow 250ms ease;
+    }
+    
+    .tag>a {
+        display: inline-block;
+        position: relative;
+        color: #283b70;
+        text-decoration: none;
+        padding: .5rem 1rem .5rem 2rem;
+    }
+    
+    .tag>a::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        width: .5rem;
+        height: .5rem;
+        border-radius: 100%;
+        background-color: var(--color);
+        transform: translateY(-50%);
+    }
+    
+    .tag:hover {
+        background-color: #d0dffc;
+        box-shadow: 0 0 0 calc(2px + .25rem) #d0dffc;
+    }
+
+    .beta {
+        color: $yellow-300;
+        background-color: $indigo-900;
+      }
+</style>
+{% endblock %}
+
+{% set color = ["#EF7D48", "#FCB561", "#FCEE61", "#B6EF4C", 
+"#7DDF3A", "#2BC82B", "#32EFB3", "#4AF1E7", "#4AD0F1", 
+"#4AAFF1", "#4A87F1", "#4A6BF1", "#8569EC", "#9769EC",
+"#FF97FA", "#F955BD", "#F9485E"] %} 
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+	<b>Welcome to keys page. Find key value here and search the corresponding image in search page.</b>
+</div>
+{% if keys %}
+<div class="container mt-5">
+    <ul class="tags">
+        {% for key in keys%}
+            <li class="tag" style="--color: {{color[loop.index % 17]}}">
+                <a href="#">{{key}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="container mt-5">
+    <p>No keys found</p>
+</div>
+{% endif %}
+{% endblock %}
+
